@@ -4,7 +4,6 @@ import axios from "axios";
 
 class BarChart extends Component {
   state = {
-    chart: null,
     graphData: null
   };
 
@@ -21,7 +20,15 @@ class BarChart extends Component {
   };
 
   drawChart() {
-    const data = this.state.graphData[1];
+    let data = [];
+    for (const obj of this.state.graphData[1]) {
+      if (obj["value"] === null) {
+        data.push(0);
+      } else {
+        data.push(parseInt(obj["value"]));
+      }
+    }
+
     console.log(data);
 
     const svg = d3
@@ -31,7 +38,7 @@ class BarChart extends Component {
       .attr("height", this.props.height)
       .style("margin-left", 100);
 
-    let chart = svg
+    svg
       .selectAll("rect")
       .data(data)
       .enter()
@@ -42,11 +49,11 @@ class BarChart extends Component {
       .attr("height", (d, i) => d * 10)
       .attr("fill", "green");
 
-    this.setState({ chart: chart });
+    console.log(svg);
   }
 
   render() {
-    return <div>{this.state.chart}</div>;
+    return <div id={"#" + this.props.id} />;
   }
 }
 
