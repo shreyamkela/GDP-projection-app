@@ -6,5 +6,5 @@ Steps to run the app:
 
 - Run the app.js in the backend folder
   `npm start`
-- Runn the index.js in the frontend folder
+- Run the index.js in the frontend folder
   `npm start`
